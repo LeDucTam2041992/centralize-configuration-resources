@@ -1,0 +1,31 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres?currentSchema=post-service
+    username: postgres
+  jpa:
+    properties:
+      hibernate:
+        default_schema: post-service
+  data:
+    redis:
+      password: yourRedisPassword
+    mongodb:
+      uri: ${MONGO_URI:mongodb://mongo:Aa%40123456@localhost:27017/k_product?authSource=admin}
+
+kpro:
+  security:
+    enable: true
+  storage:
+    provider: minio # supported: none, minio, aws-s3
+    endpoint: 'http://minio-api.kube-dev.io:6060'
+    region: ap-southeast-1
+    bucket: storage-public-dev-bucket
+    credentials-access-key: T7DUNacoydsHT7r4
+    credentials-secret-key: 8Kbm5eldS3NsG0oKpN3rXvaaCDGjpVFd
+  origins: http://localhost:4200, http://localhost:3200
