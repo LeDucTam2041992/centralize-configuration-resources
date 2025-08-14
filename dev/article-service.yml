@@ -5,6 +5,22 @@ management:
         include: "*"
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  messages:
+    basename: messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://127.0.0.1:5432/postgres?currentSchema=post-service
