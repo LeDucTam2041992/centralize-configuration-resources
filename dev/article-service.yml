@@ -6,17 +6,33 @@ management:
 
 spring:
   datasource:
+    driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://127.0.0.1:5432/postgres?currentSchema=post-service
     username: postgres
+    password: password
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        ddl-auto: update
+      show-sql: true
     properties:
       hibernate:
+        enable_lazy_load_no_trans: true
+        format_sql: true
         default_schema: post-service
   data:
     redis:
+      cluster:
+        nodes: 127.0.0.1:7000,127.0.0.1:7001
       password: yourRedisPassword
+      timeout: 5000
+        lettuce:
+          pool:
+            max-active: 10
+            max-idle: 10
+            min-idle: 1
     mongodb:
-      uri: ${MONGO_URI:mongodb://mongo:Aa%40123456@localhost:27017/k_product?authSource=admin}
+      uri: mongodb://mongo:Aa%40123456@localhost:27017/k_product?authSource=admin
 
 kpro:
   security:
