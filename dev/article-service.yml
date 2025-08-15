@@ -50,6 +50,10 @@ spring:
     mongodb:
       uri: mongodb://mongo:Aa%40123456@localhost:27017/k_product?authSource=admin
 
+application:
+  config:
+    secret: Supper_Cat
+
 kpro:
   security:
     enable: true
