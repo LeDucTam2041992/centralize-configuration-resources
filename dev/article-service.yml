@@ -28,9 +28,9 @@ spring:
     password: password
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-      hibernate:
-        ddl-auto: update
-      show-sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
