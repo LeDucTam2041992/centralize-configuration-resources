@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: product-catalog-service
+  lifecycle:
+    timeout-per-shutdown-phase: 60
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=product-catalog
+    username: tamld
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: product-catalog
+  data:
+    redis:
+      database: 4
+      host: redis-master
+      port: 6379
+
+kpro:
+  security:
+    enable: true
+    jwt:
+      config:
+        internal-key-sign: 4XpHYNCVmJJ7bYmSI1+fJX90Nv1tZ+2DK48WPH/MDTs=
+    public-paths:
+      - /v3/**
+      - /swagger-ui/**
+      - /actuator/**
+      - /prometheus/**
+    access-control:
+      url-check-permission: http://permission-management-service:80/service-api/permissions/check?permission={permission}&username={username}
+  origins: ${HTTP_ORIGIN:http://localhost:4200, http://localhost:3200}
+
