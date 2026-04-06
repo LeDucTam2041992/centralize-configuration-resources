@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  cloud:
+    config:
+      enabled: true
+
+  messages:
+    basename: messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
+
+logging:
+  level:
+    root: INFO

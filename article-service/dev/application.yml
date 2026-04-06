@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: article-service
+  lifecycle:
+    timeout-per-shutdown-phase: 60s
+  data:
+    redis:
+      database: 5
+      host: 127.0.0.1
+      port: 6379
+    mongodb:
+      uri: mongodb://localhost:27017/k_product?authSource=admin
+
+kpro:
+  security:
+    jwt:
+      config:
+        internal-key-sign: 4XpHYNCVmJJ7bYmSI1+fJX90Nv1tZ+2DK48WPH/MDTs=
+    public-paths:
+      - /v3/**
+      - /swagger-ui/**
+      - /actuator/**
+      - /prometheus/**
+      - /api/config/**
+      - /client-api/v1/storage/**
+    access-control:
+      url-check-permission: http://localhost:8010/service-api/permissions/check?permission={permission}&username={username}
+
+  storage:
+    provider: minio
+    endpoint: 'http://minio.kproduct.io:9000'
+    region: 'ap-southeast-1'
+    bucket: 'storage-public-kproduct-bucket'
+    credentials-access-key: kprouser
+    credentials-secret-key: 123456aA@
+    image-convert: macos-m1
+
+  origins: ${HTTP_ORIGIN:http://localhost:4200, http://localhost:3200}
+
+cwebp:
+  path: /usr/bin/cwebp
+  temporary-dir: /users/images
