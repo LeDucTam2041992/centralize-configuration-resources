@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: service-manager
+  lifecycle:
+    timeout-per-shutdown-phase: 60s
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=permission-service
+    username: tamld
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    redis:
+      database: 3
+      host: redis-master
+      port: 6379
+
+kpro:
+  security:
+    jwt:
+      config:
+        internal-key-sign: 4XpHYNCVmJJ7bYmSI1+fJX90Nv1tZ+2DK48WPH/MDTs=
+    public-paths:
+      - /api/tests/**
+      - /api/permissions/check
+      - /actuator/**
+      - /prometheus/**
+  origins: ${HTTP_ORIGIN:http://localhost:4200, http://localhost:3200}
+
+  identity:
+    url: http://keycloakx-http:80
+    realm: master
+    client-id: admin-cli
+    username: tamld
+    password: 123456
