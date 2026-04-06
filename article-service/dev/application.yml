@@ -6,10 +6,10 @@ spring:
   data:
     redis:
       database: 5
-      host: 127.0.0.1
+      host: redis-master
       port: 6379
     mongodb:
-      uri: mongodb://localhost:27017/k_product?authSource=admin
+      uri: mongodb://host.docker.internal:27017/k_product?authSource=admin
 
 kpro:
   security:
@@ -24,11 +24,11 @@ kpro:
       - /api/config/**
       - /client-api/v1/storage/**
     access-control:
-      url-check-permission: http://localhost:8010/service-api/permissions/check?permission={permission}&username={username}
+      url-check-permission: http://permission-management-service:80/service-api/permissions/check?permission={permission}&username={username}
 
   storage:
     provider: minio
-    endpoint: 'http://minio.kproduct.io:9000'
+    endpoint: http://host.docker.internal:9000
     region: 'ap-southeast-1'
     bucket: 'storage-public-kproduct-bucket'
     credentials-access-key: kprouser
